@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/json-server/schema.json",
+  "products": [
+    {
+      "name": "Gummianka",
+      "description": "Bra att rådfråga när man kodar.",
+      "price": 99
+    },
+    {
+      "name": "Stressboll",
+      "description": "Bra att klämma på när man kodar.",
+      "price": 57
+    },
+    {
+      "name": "Jolt Cola",
+      "description": "Bra att dricka litervis av när man kodar.",
+      "price": 15
+    }
+  ]
+}
