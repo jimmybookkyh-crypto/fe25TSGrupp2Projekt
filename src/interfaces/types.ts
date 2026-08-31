@@ -1,5 +1,5 @@
 export interface Room {
-id: string;
+id: number;
 name: string;
 capacity: number;
 equipment: string;
@@ -11,7 +11,7 @@ roomId: number;
 date: string;
 slots: string[];
 email: string;
-bookingStatus: boolean;
+bookingStatus: "confirmed" | "cancelled";
 }
 
 export const allSlots = [
