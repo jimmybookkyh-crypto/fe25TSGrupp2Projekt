@@ -42,7 +42,7 @@
         "10:00"
       ],
       "email": "anna@example.com",
-      "book" : true
+      "bookingStatusingStatus" : true
 
     },
     {
@@ -53,7 +53,7 @@
         "13:00"
       ],
       "email": "kalle@example.com",
-      "book" : true
+      "bookingStatus" : true
     },
     {
       "id": "3",
@@ -64,7 +64,7 @@
         "12:00"
       ],
       "email": "mia@example.com",
-      "book" : true
+      "bookingStatus" : true
     },
     {
       "id": "4",
@@ -74,7 +74,7 @@
         "14:00"
       ],
       "email": "erik@example.com",
-      "book" : true
+      "bookingStatus" : true
     },
     {
       "id": "5",
@@ -84,7 +84,7 @@
         "09:00"
       ],
       "email": "test@example.com",
-      "book" : true
+      "bookingStatus" : true
     },{
       "id": "1",
       "roomId": 1,
@@ -94,7 +94,7 @@
         "10:00"
       ],
       "email": "anna@example.com",
-      "book" : true
+      "bookingStatus" : true
     },
     {
       "id": "2",
@@ -104,7 +104,7 @@
         "13:00"
       ],
       "email": "kalle@example.com",
-      "book" : true
+      "bookingStatus" : true
     },
     {
       "id": "3",
@@ -115,7 +115,7 @@
         "12:00"
       ],
       "email": "mia@example.com",
-      "book" : true
+      "bookingStatus" : true
     },
     {
       "id": "4",
@@ -125,7 +125,7 @@
         "14:00"
       ],
       "email": "erik@example.com",
-      "book" : true
+      "bookingStatus" : true
     },
     {
       "id": "5",
@@ -135,7 +135,7 @@
         "09:00"
       ],
       "email": "test@example.com",
-      "book" : true
+      "bookingStatus" : true
     }
   ]
 }
