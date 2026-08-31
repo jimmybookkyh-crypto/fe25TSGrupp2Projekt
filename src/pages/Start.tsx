@@ -10,7 +10,7 @@ export default function Start() {
     setDate(selectedDate);
 
     if (selectedDate) {
-      navigate('/resources?date=${selectedDate}');
+      navigate(`/resources?date=${selectedDate}`);
     }
   }
 
@@ -18,11 +18,7 @@ export default function Start() {
     <div>
       <h1>Boka Rum</h1>
       <p>Välj datum</p>
-      <input
-        type="date"
-        value={date}
-        onChange={handleDateChange}
-      />
+      <input type="date" value={date} onChange={handleDateChange} />
     </div>
   );
 }
