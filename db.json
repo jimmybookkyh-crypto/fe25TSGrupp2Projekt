@@ -1,20 +1,141 @@
 {
   "$schema": "./node_modules/json-server/schema.json",
-  "products": [
+  "rooms": [
     {
-      "name": "Gummianka",
-      "description": "Bra att rådfråga när man kodar.",
-      "price": 99
+      "id": "1",
+      "name": "Apelsin",
+      "capacity": 6,
+      "equipment": "Projektor, Whiteboard, HDMI"
     },
     {
-      "name": "Stressboll",
-      "description": "Bra att klämma på när man kodar.",
-      "price": 57
+      "id": "2",
+      "name": "Banan",
+      "capacity": 4,
+      "equipment": "TV-skärm, Whiteboard"
     },
     {
-      "name": "Jolt Cola",
-      "description": "Bra att dricka litervis av när man kodar.",
-      "price": 15
+      "id": "3",
+      "name": "Clementin",
+      "capacity": 8,
+      "equipment": "Projektor, Konferenstelefon, Whiteboard"
+    },
+    {
+      "id": "4",
+      "name": "Druva",
+      "capacity": 10,
+      "equipment": "Projektor, Surround-ljud, Whiteboard"
+    },
+    {
+      "id": "5",
+      "name": "Elefant",
+      "capacity": 12,
+      "equipment": "TV-skärm, Konferenstelefon, Whiteboard, HDMI"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "1",
+      "roomId": 1,
+      "date": "2026-09-01",
+      "slots": [
+        "09:00",
+        "10:00"
+      ],
+      "email": "anna@example.com",
+      "book" : true
+
+    },
+    {
+      "id": "2",
+      "roomId": 1,
+      "date": "2026-09-01",
+      "slots": [
+        "13:00"
+      ],
+      "email": "kalle@example.com",
+      "book" : true
+    },
+    {
+      "id": "3",
+      "roomId": 2,
+      "date": "2026-09-01",
+      "slots": [
+        "11:00",
+        "12:00"
+      ],
+      "email": "mia@example.com",
+      "book" : true
+    },
+    {
+      "id": "4",
+      "roomId": 3,
+      "date": "2026-09-01",
+      "slots": [
+        "14:00"
+      ],
+      "email": "erik@example.com",
+      "book" : true
+    },
+    {
+      "id": "5",
+      "roomId": 1,
+      "date": "2026-09-01",
+      "slots": [
+        "09:00"
+      ],
+      "email": "test@example.com",
+      "book" : true
+    },{
+      "id": "1",
+      "roomId": 1,
+      "date": "2026-09-01",
+      "slots": [
+        "09:00",
+        "10:00"
+      ],
+      "email": "anna@example.com",
+      "book" : true
+    },
+    {
+      "id": "2",
+      "roomId": 1,
+      "date": "2026-09-01",
+      "slots": [
+        "13:00"
+      ],
+      "email": "kalle@example.com",
+      "book" : true
+    },
+    {
+      "id": "3",
+      "roomId": 2,
+      "date": "2026-09-01",
+      "slots": [
+        "11:00",
+        "12:00"
+      ],
+      "email": "mia@example.com",
+      "book" : true
+    },
+    {
+      "id": "4",
+      "roomId": 3,
+      "date": "2026-09-01",
+      "slots": [
+        "14:00"
+      ],
+      "email": "erik@example.com",
+      "book" : true
+    },
+    {
+      "id": "5",
+      "roomId": 1,
+      "date": "2026-09-01",
+      "slots": [
+        "09:00"
+      ],
+      "email": "test@example.com",
+      "book" : true
     }
   ]
 }
