@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, useSearchParams } from "react-router";
 import useFetch from "../utils/useFetch";
-import { allSlots, type Room, type Booking} from "../interfaces/types"
+import { allSlots, type Room, type Booking } from "../interfaces/types";
 
 
 export default function ResourceDetails() {
@@ -10,31 +10,14 @@ export default function ResourceDetails() {
   const date = searchParams.get("date");
   const [selectedSlots, setSelectedSlots] = useState<string[]>([]);
  
-  const { 
-    data: room,
-    loading: roomLoading,
-    error: roomError 
-  } = useFetch<Room>('api/resources/${id}');
+  const [room, roomLoading] = useFetch<Room>(`/api/rooms/${id}`);
 
-  const { 
-    data: slots,
-    loading: slotsLoading,
-    error: slotsError 
-  } = useFetch<string[]>('api/resources/${id}/slots?date=${date}');
+  const [bookings, bookingsLoading] = useFetch<Booking[]>(
+    `/api/bookings?roomId=${id}&date=${date}`
+  );
 
-  const { 
-    data: bookings,
-    loading: bookingsLoading,
-    error: bookingsError 
-  } = useFetch<Booking>('api/bookings?roomId=${id}&date=${date}');
-
-
-  if (roomLoading || slotsLoading || bookingsLoading) {
+  if (roomLoading || bookingsLoading) {
     return <p>Laddar data...</p>
-  };
-
-  if (roomError || slotsError || bookingsError) {
-    return <p>Fel vid hämtning av data</p>
   };
 
   function isBooked(slot: string): boolean {
@@ -59,10 +42,10 @@ export default function ResourceDetails() {
   return (
     <div>
       <section>
-        <h2>{room?.name}</h2>
+        <h2>{room.name}</h2>
         <p>Datum: {date}</p>
-        <p>Plats för: {room?.capacity}</p>
-        <p>Utrustning: {room?.equipment}</p>
+        <p>Plats för: {room.capacity}</p>
+        <p>Utrustning: {room.equipment}</p>
       </section>
 
       <section>
@@ -70,15 +53,33 @@ export default function ResourceDetails() {
         <section>
           {allSlots.map((startTime) => {
             const hour = Number(startTime.slice(0, 2))
-            const endTime = '${String(hour + 1).padStart(2, '0')}:00'
+            const endTime = `${String(hour + 1).padStart(2, "0")}:00`;
             const booked = isBooked(startTime)
-            const available = slots?.includes(startTime) ?? false
 
-            if(booked || !available) {
+            if (booked) {
               return null;
             }
+            const selected = selectedSlots.includes(startTime);
+
+            return (
+              <button
+                key={startTime}
+                type="button"
+                onClick={() => filterSlot(startTime)}
+                aria-pressed={selected}>
+                {startTime} - {endTime}
+              </button>
+            );
           })}
         </section>
+      </section>
+      <section>
+        <button
+          type="button"
+          disabled={selectedSlots.length === 0}
+          onClick={handleBooking}>
+          Boka valda tider
+        </button>
       </section>
     </div>
   );
