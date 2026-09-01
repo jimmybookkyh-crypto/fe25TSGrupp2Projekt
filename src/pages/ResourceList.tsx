@@ -8,14 +8,12 @@ export default function ResourceList() {
   const [params] = useSearchParams();
   const date = params.get("date");
 
-  const [rooms] = useFetch<Room[]>("http://localhost:3000/rooms");
-  const [bookings] = useFetch<Booking[]>(
-    `http://localhost:3000/bookings?date=${date}`,
-  );
-  if (!rooms) {
-    return <p>Kunde inte hämta data!</p>; //guard
+  const [rooms] = useFetch<Room[]>(`api/rooms`);
+  const [bookings] = useFetch<Booking[]>(`api/bookings?date=${date}`);
+  if (!rooms || !bookings) {
+    return <p>Laddar</p>; //guard
   }
-  function isRoomFullyBooked(roomId: number) {
+  function isRoomFullyBooked(roomId: string) {
     if (!bookings) return false;
     const roomBookings = bookings.filter((b) => b.roomId === roomId);
     const bookedSlots = roomBookings.flatMap((b) => b.slots);
@@ -26,12 +24,15 @@ export default function ResourceList() {
 
   return (
     <div>
-      <h1>Lediga rum</h1>
-      <p>Datum: {date}</p>
-      {availableRooms.length === 0 && (
-        <p>Tyvärr har vi inga rum lediga önskat datum!</p>
-      )}
-      <ul>
+      <section className="Lediga rum">
+        <h1>Lediga rum</h1>
+        <p>Datum: {date}</p>
+
+        {availableRooms.length === 0 && (
+          <p>Tyvärr har vi inga rum lediga önskat datum!</p>
+        )}
+      </section>
+      <ul className="Rooms">
         {availableRooms.map((room) => (
           <li key={room.id}>
             <button
