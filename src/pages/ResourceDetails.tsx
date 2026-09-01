@@ -16,12 +16,13 @@ export default function ResourceDetails() {
     `/api/bookings?roomId=${id}&date=${date}`
   );
 
-  if (roomLoading || bookingsLoading) {
+  if (!room || roomLoading || bookingsLoading) {
     return <p>Laddar data...</p>
   };
 
   function isBooked(slot: string): boolean {
     return bookings?.some((booking) => 
+      booking.bookingStatus === "confirmed" &&
       booking.slots.includes(slot)
     )?? false
   }
