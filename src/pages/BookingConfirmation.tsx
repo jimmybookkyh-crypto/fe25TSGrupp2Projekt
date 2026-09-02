@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation } from "react-router";
 import type { Booking, Room } from "../interfaces/types";
 
@@ -15,6 +16,20 @@ export default function BookingConfirmation() {
     return <p>Laddar bokning...</p>;
   }
 
+
+  async function handleCancel() {
+  
+    const response = await fetch(`/api/bookings/${booking.id}`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ bookingStatus: "cancelled" })
+    });
+
+    if (!response.ok) return;
+
+}
+
+
   return (
     <div>
       <section className="Bokningsbekräftelse">
@@ -30,6 +45,9 @@ export default function BookingConfirmation() {
         <br />
         Status: {booking.bookingStatus}
       </p>
+      <button type ="button"onClick={handleCancel} >
+       Avboka
+      </button>
     </div>
   );
 }
