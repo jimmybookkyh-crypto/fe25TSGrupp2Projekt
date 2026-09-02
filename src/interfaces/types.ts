@@ -14,6 +14,9 @@ export interface Booking {
   bookingStatus: "confirmed" | "cancelled";
 }
 
+export type newBooking = Omit<Booking, "id">;
+
+
 export const allSlots = [
   "09:00",
   "10:00",
