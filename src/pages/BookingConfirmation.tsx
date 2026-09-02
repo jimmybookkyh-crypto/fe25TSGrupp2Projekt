@@ -1,17 +1,15 @@
-import { useSearchParams } from "react-router";
-import useFetch from "../utils/useFetch";
+import { useLocation } from "react-router";
 import type { Booking, Room } from "../interfaces/types";
 
 //Datum, rum och tid som är bokade.
-//Ta emot data från Booking.tsx
+
 //en funktion state variabel för useLcation och attribus som ska hämtas
 //if för return som kollar vad det finns för state och gör en navigate till URL som replace som lägger in informationen som finns.
 
 export default function BookingConfirmation() {
-  const [params] = useSearchParams();
-  const id = params.get("id");
-  const [booking] = useFetch<Booking>(`api/bookings/${id}`);
-  const [room] = useFetch<Room>(`api/rooms/${id}`);
+  const { state } = useLocation(); //Ta emot data från Booking.tsx
+  const { room, booking } = state;
+  console.log(room, booking);
 
   if (!booking || !room) {
     return <p>Laddar bokning...</p>;
@@ -27,7 +25,10 @@ export default function BookingConfirmation() {
         Datum: {booking.date} <br />
         Tider: {booking.slots.join(", ")} <br />
         Utrustning: {room.equipment} <br />
-        E-post: {booking.email}
+        E-post: {booking.email} <br />
+        BokningsId: {booking.id}
+        <br />
+        Status: {booking.bookingStatus}
       </p>
     </div>
   );
