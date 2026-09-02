@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useSearchParams } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 import useFetch from "../utils/useFetch";
 import { allSlots, type Room, type Booking } from "../interfaces/types";
 
@@ -9,6 +9,7 @@ export default function ResourceDetails() {
   const [searchParams] = useSearchParams();
   const date = searchParams.get("date");
   const [selectedSlots, setSelectedSlots] = useState<string[]>([]);
+  const navigate = useNavigate();
  
   const [room, roomLoading] = useFetch<Room>(`/api/rooms/${id}`);
 
@@ -27,7 +28,7 @@ export default function ResourceDetails() {
     )?? false
   }
 
-  function filterSlot(slot: string): void {
+  function toggleSlot(slot: string): void {
     setSelectedSlots((currentSlots) => {
       if (currentSlots.includes(slot)) {
         return currentSlots.filter((currentSlot) => currentSlot !== slot)
@@ -36,8 +37,8 @@ export default function ResourceDetails() {
     })
   }
 
-  function  handleBooking(): void {
-    console.log("test valda filer: ", selectedSlots); 
+  function handleBooking(): void {
+    navigate(`/bookings?roomId=${id}&date=${date}${selectedSlots.map(s => `&slots=${s}`).join("")}`);      
   } 
  
   return (
@@ -66,7 +67,7 @@ export default function ResourceDetails() {
               <button
                 key={startTime}
                 type="button"
-                onClick={() => filterSlot(startTime)}
+                onClick={() => toggleSlot(startTime)}
                 aria-pressed={selected}>
                 {startTime} - {endTime}
               </button>

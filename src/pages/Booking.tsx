@@ -34,13 +34,18 @@ export default function Booking() {
       bookingStatus: "confirmed",
     };
 
-    await fetch("/api/bookings", {
+    const response = await fetch("/api/bookings", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newBooking),
     });
 
-    navigate("/bookingsConformation");
+    const savedBooking = await response.json();
+
+    navigate(`/bookingsConfirmation`, {
+      state: { id: savedBooking.id },
+    });
+  
   }
   return (
     <div>
