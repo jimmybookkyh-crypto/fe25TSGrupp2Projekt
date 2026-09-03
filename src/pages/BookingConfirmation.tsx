@@ -1,17 +1,13 @@
 import { useState } from "react";
 import { useLocation, Link } from "react-router";
 import type { Booking, Room } from "../interfaces/types";
-//Datum, rum och tid som är bokade.
-
-//en funktion state variabel för useLcation och attribus som ska hämtas
-//if för return som kollar vad det finns för state och gör en navigate till URL som replace som lägger in informationen som finns.
 
 export default function BookingConfirmation() {
-  const { state } = useLocation(); //Ta emot data från Booking.tsx
-  if (!state) { // Felhantering om sidan skulle laddas utan bokningsdata följer med
-    return <p>Ett fel har uppstått</p>
+  const { state } = useLocation();
+  if (!state) {
+    return <p>Ett fel har uppstått</p>;
   }
-  
+
   const { room, booking } = state as {
     room: Room;
     booking: Booking;
@@ -21,23 +17,20 @@ export default function BookingConfirmation() {
   }
 
   const [showConfirm, setShowConfirm] = useState(false);
-  const [cancelled, setCancelled] = useState(false); 
+  const [cancelled, setCancelled] = useState(false);
 
   async function handleCancel() {
-  
     const response = await fetch(`/api/bookings/${booking.id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ bookingStatus: "cancelled" })
+      body: JSON.stringify({ bookingStatus: "cancelled" }),
     });
 
     if (!response.ok) return;
 
     setCancelled(true);
     setShowConfirm(false);
-
-}
-
+  }
 
   return (
     <div>
@@ -47,48 +40,43 @@ export default function BookingConfirmation() {
 
       {cancelled ? (
         <>
-          <p>Tiden avbokad</p>
+          <h2>Din tid är nu avbokad!</h2>
+          <p>För att boka på nytt gå till startsidan.</p>
           <Link to="/">
-            <button type="button">
-              Till start
-            </button>
+            <button type="button">Tillbaka till start</button>
           </Link>
         </>
-      ) : 
-      <>
-      <p className="Rooms">
-        Rum: {room.name} <br />
-        Datum: {booking.date} <br />
-        Tider: {booking.slots.join(", ")} <br />
-        Utrustning: {room.equipment} <br />
-        E-post: {booking.email} <br />
-      </p>
-      <button type ="button"
-        onClick={() => setShowConfirm(true)}>
-       Avboka
-      </button>
-        
-      {showConfirm && (
-        <dialog open>
-              <p>Avboka?</p>
-                 <button type ="button"
-                  onClick={handleCancel}>
-                  Ja
+      ) : (
+        <>
+          <p className="Rooms">
+            Rummets namn: {room.name} <br />
+            Datum: {booking.date} <br />
+            Bokade tider: {booking.slots.join(", ")} <br />
+            Utrustning: {room.equipment} <br />
+            E-post: {booking.email} <br />
+          </p>
+          <button type="button" onClick={() => setShowConfirm(true)}>
+            Avboka min bokning
+          </button>
+
+          {showConfirm && (
+            <dialog open>
+              <h2>Avbokning</h2>
+              <p>Är du säker att du vill avboka din bokning?</p>
+              <button type="button" onClick={handleCancel}>
+                Ja
               </button>
-              <button type ="button"
-                  onClick={() => setShowConfirm(false)}>
-                  Nej
-             </button>            
-        </dialog>
-      )}
-      <br />
-      <Link to="/">
-        <button type="button">
-          Till start
-        </button>
+              <button type="button" onClick={() => setShowConfirm(false)}>
+                Nej
+              </button>
+            </dialog>
+          )}
+          <br />
+          <Link to="/">
+            <button type="button">Tillbaka till start</button>
           </Link>
-          </>
-    }
+        </>
+      )}
     </div>
   );
 }
