@@ -18,7 +18,7 @@ export default function Booking() {
   if (!room || loading) {
     return <p>Laddar...</p>;
   }
-  
+
   function getEndTime(startTime: string) {
     const hour = Number(startTime.slice(0, 2));
     return `${String(hour + 1).padStart(2, "0")}:00`;
@@ -43,9 +43,8 @@ export default function Booking() {
     const savedBooking = await response.json();
 
     navigate(`/bookingsConfirmation`, {
-      state: { id: savedBooking.id },
+      state: { room: room, booking: savedBooking },
     });
-  
   }
   return (
     <div>
@@ -57,12 +56,12 @@ export default function Booking() {
         <p>Plats för: {room.capacity}</p>
         <p>Utrustning: {room.equipment}</p>
       </section>
-      <section className="BookingDetails"> 
+      <section className="BookingDetails">
         <h3>Valda tider:</h3>
         <ul>
           {slots.map((start) => (
             <li key={start}>
-              {start} - {getEndTime(start)} 
+              {start} - {getEndTime(start)}
             </li>
           ))}
         </ul>
@@ -78,17 +77,14 @@ export default function Booking() {
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
-        <button type="submit">
-          Bekräfta bokning
-        </button>
+        <button type="submit">Bekräfta bokning</button>
       </form>
-    </div >
+    </div>
   );
 }
 
-
-  Booking.route = {
-    path: "/bookings",
-    order: 4,
-    label: "Boknings detaljer",
-  };
+Booking.route = {
+  path: "/bookings",
+  order: 4,
+  label: "Boknings detaljer",
+};
