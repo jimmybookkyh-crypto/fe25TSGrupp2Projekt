@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, Link } from "react-router";
 import type { Booking, Room } from "../interfaces/types";
-
 //Datum, rum och tid som är bokade.
 
 //en funktion state variabel för useLcation och attribus som ska hämtas
@@ -9,13 +8,20 @@ import type { Booking, Room } from "../interfaces/types";
 
 export default function BookingConfirmation() {
   const { state } = useLocation(); //Ta emot data från Booking.tsx
-  const { room, booking } = state;
-  console.log(room, booking);
-
+  if (!state) { // Felhantering om sidan skulle laddas utan bokningsdata följer med
+    return <p>Ett fel har uppstått</p>
+  }
+  
+  const { room, booking } = state as {
+    room: Room;
+    booking: Booking;
+  };
   if (!booking || !room) {
     return <p>Laddar bokning...</p>;
   }
 
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [cancelled, setCancelled] = useState(false); 
 
   async function handleCancel() {
   
@@ -27,6 +33,9 @@ export default function BookingConfirmation() {
 
     if (!response.ok) return;
 
+    setCancelled(true);
+    setShowConfirm(false);
+
 }
 
 
@@ -35,19 +44,51 @@ export default function BookingConfirmation() {
       <section className="Bokningsbekräftelse">
         <h1>Bokningsbekräftelse</h1>
       </section>
+
+      {cancelled ? (
+        <>
+          <p>Tiden avbokad</p>
+          <Link to="/">
+            <button type="button">
+              Till start
+            </button>
+          </Link>
+        </>
+      ) : 
+      <>
       <p className="Rooms">
         Rum: {room.name} <br />
         Datum: {booking.date} <br />
         Tider: {booking.slots.join(", ")} <br />
         Utrustning: {room.equipment} <br />
         E-post: {booking.email} <br />
-        BokningsId: {booking.id}
-        <br />
-        Status: {booking.bookingStatus}
       </p>
-      <button type ="button"onClick={handleCancel} >
+      <button type ="button"
+        onClick={() => setShowConfirm(true)}>
        Avboka
       </button>
+        
+      {showConfirm && (
+        <dialog open>
+              <p>Avboka?</p>
+                 <button type ="button"
+                  onClick={handleCancel}>
+                  Ja
+              </button>
+              <button type ="button"
+                  onClick={() => setShowConfirm(false)}>
+                  Nej
+             </button>            
+        </dialog>
+      )}
+      <br />
+      <Link to="/">
+        <button type="button">
+          Till start
+        </button>
+          </Link>
+          </>
+    }
     </div>
   );
 }
