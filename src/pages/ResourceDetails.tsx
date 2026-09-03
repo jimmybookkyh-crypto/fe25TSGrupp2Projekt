@@ -43,6 +43,9 @@ export default function ResourceDetails() {
  
   return (
     <div>
+      <section className="hero">
+        <h1>Rumdetaljer</h1>
+      </section>
       <section>
         <h2>{room.name}</h2>
         <p>Datum: {date}</p>
@@ -52,7 +55,7 @@ export default function ResourceDetails() {
 
       <section>
         <h2>Lediga tider</h2>
-        <section>
+        <section className="time-list">
           {allSlots.map((startTime) => {
             const hour = Number(startTime.slice(0, 2))
             const endTime = `${String(hour + 1).padStart(2, "0")}:00`;
@@ -67,6 +70,7 @@ export default function ResourceDetails() {
               <button
                 key={startTime}
                 type="button"
+                className={`time-slot ${selected ? "selected" : ""}`}
                 onClick={() => toggleSlot(startTime)}
                 aria-pressed={selected}>
                 {startTime} - {endTime}

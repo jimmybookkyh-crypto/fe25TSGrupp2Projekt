@@ -48,8 +48,9 @@ export default function Booking() {
   }
   return (
     <div>
+      <section className="hero">
       <h1>Boknings detaljer</h1>
-
+      </section>
       <section className="BookingDetails">
         <h2>Rummets namn: {room.name}</h2>
         <p>Datum: {date}</p>

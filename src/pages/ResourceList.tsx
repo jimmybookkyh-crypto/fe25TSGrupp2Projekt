@@ -24,7 +24,7 @@ export default function ResourceList() {
 
   return (
     <div>
-      <section className="Lediga rum">
+      <section className="hero">
         <h1>Lediga rum</h1>
         <p>Datum: {date}</p>
 

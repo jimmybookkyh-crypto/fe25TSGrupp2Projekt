@@ -1,0 +1,283 @@
+:root {
+  --burnt-orange: #fc6c26;
+  --vanilla: #fff4d6;
+  --white: #ffffff;
+  --text-dark: #222;
+  --text-light: #fff;
+
+  --radius-s: 6px;
+  --radius-m: 12px;
+
+  --space-xs: 0.25rem;
+  --space-s: 0.5rem;
+  --space-m: 1rem;
+  --space-l: 2rem;
+
+  --font-base: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Global */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--vanilla);
+  font-family: var(--font-base);
+  color: var(--text-dark);
+}
+
+main {
+  padding: var(--space-m);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Header */
+header {
+  background-color: var(--burnt-orange);
+  color: var(--text-light);
+  padding: var(--space-m);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+header .back-btn {
+  background: transparent;
+  border: 2px solid var(--white);
+  color: var(--white);
+  padding: var(--space-s) var(--space-m);
+  border-radius: var(--radius-s);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Headings */
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: var(--space-m);
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-bottom: var(--space-s);
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: var(--space-s);
+}
+
+/* Sections */
+section,
+.hero,
+.Rooms,
+.BookingDetails,
+.BokningsbekrÃ¤ftelse {
+  background-color: var(--white);
+  padding: var(--space-m);
+  border-radius: var(--radius-m);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: var(--space-m);
+}
+
+/* Buttons */
+button {
+  padding: 0.8rem 1.2rem;
+  background-color: var(--burnt-orange);
+  color: var(--text-light);
+  border: none;
+  border-radius: var(--radius-s);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/*  Start */
+.date-picker section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.date-picker input[type="date"] {
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--burnt-orange);
+  border-radius: var(--radius-m);
+  background-color: var(--white);
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+/* Rooms (resource list) */
+.Rooms {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: 1fr;
+}
+
+.Rooms li {
+  margin: 0;
+  padding: 0;
+}
+
+.Rooms li button {
+  background-color: var(--burnt-orange);
+  color: var(--white);
+  padding: var(--space-m);
+  border-radius: var(--radius-m);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Resource Details */
+.time-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin-top: 1rem;
+}
+
+.time-slots {
+  display: flex;
+  gap: 0.6rem;
+  /* stort mellanrum */
+  margin-top: 0.5rem;
+}
+
+.time-slot {
+  display: block;
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 2px solid var(--burnt-orange);
+  border-radius: var(--radius-m);
+  background-color: var(--white);
+  color: var(--text-dark);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/* selected time */
+.time-slot.selected {
+  background-color: var(--burnt-orange);
+  color: var(--white);
+  border-color: var(--burnt-orange);
+}
+
+/* Hover-effect */
+.time-slot:hover {
+  background-color: #ffe6cc;
+}
+
+/* Booking page*/
+.BookingPage form {
+  background-color: var(--white);
+  padding: var(--space-m);
+  border-radius: var(--radius-m);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+.BookingPage input[type="email"] {
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--burnt-orange);
+  border-radius: var(--radius-m);
+  background-color: var(--white);
+}
+
+/* Confirm Booking Section (booking page) */
+.confirm-booking-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  padding: var(--space-l);
+  margin-top: var(--space-m);
+}
+
+.confirm-booking-section input[type="email"] {
+  padding: 1rem;
+  border: 2px solid var(--burnt-orange);
+  border-radius: var(--radius-m);
+  background-color: var(--white);
+}
+
+/* Booking Confirmation Page */
+.BookingConfirmationPage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+}
+
+.BookingConfirmationPage .confirmation-details {
+  background-color: var(--white);
+  padding: var(--space-m);
+  border-radius: var(--radius-m);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.cancel-button {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: var(--burnt-orange);
+  color: var(--white);
+  border-radius: var(--radius-m);
+  font-weight: 600;
+}
+
+/* RESPONSIVE DESIGN */
+@media (min-width: 768px) {
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .Rooms {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+    .time-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.4rem;
+    }
+}
+
+@media (min-width: 1100px) {
+  .Rooms {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .time-slots {
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
