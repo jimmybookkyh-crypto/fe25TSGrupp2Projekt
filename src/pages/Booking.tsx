@@ -12,6 +12,7 @@ export default function Booking() {
   const slots = params.getAll("slots");
 
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const [room, loading] = useFetch<Room>(`/api/rooms/${roomId}`);
 
@@ -24,8 +25,27 @@ export default function Booking() {
     return `${String(hour + 1).padStart(2, "0")}:00`;
   }
 
-  async function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) { // update for correct event type cause formEvent is to be phased out
     event.preventDefault();
+
+    const bookingsResponse = await fetch(`/api/bookings?roomId=${roomId}&date=${date}`);
+    const existingBookings = await bookingsResponse.json();
+
+    const alreadyBookedSlots = existingBookings.flatMap((booking: any) => booking.slots);
+
+    const conflictingSlots = slots.filter((slot) => alreadyBookedSlots.includes(slot));
+
+    if (conflictingSlots.length > 0) {
+      const formattedConflicts = conflictingSlots.map(
+        (slot) => `${slot} - ${getEndTime(slot)}`
+      );
+
+      setError(
+        `Följande tider är redan bokade: ${formattedConflicts.join(", ")}`
+      );
+      return;
+    } 
+
     const newBooking = {
       roomId,
       date,
@@ -66,6 +86,19 @@ export default function Booking() {
           ))}
         </ul>
       </section>
+
+      {error && (
+        <section className="BookingDetails" style={{ color: "red", fontWeight: 600 }}>
+          <p>{error}</p>
+
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+          >
+            Påbörja ny bokning
+          </button>
+        </section>
+      )}
 
       <form onSubmit={handleSubmit}>
         <label>
