@@ -14,6 +14,7 @@ export default function Booking() {
   const slots = params.getAll("slots");
 
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const [room, loading] = useFetch<Room>(`/api/rooms/${roomId}`);
 
@@ -27,6 +28,25 @@ export default function Booking() {
   }
 
   async function handleSubmit(): Promise<void> {
+
+    const bookingsResponse = await fetch(`/api/bookings?roomId=${roomId}&date=${date}`);
+    const existingBookings = await bookingsResponse.json();
+
+    const alreadyBookedSlots = existingBookings.flatMap((booking: any) => booking.slots);
+
+    const conflictingSlots = slots.filter((slot) => alreadyBookedSlots.includes(slot));
+
+    if (conflictingSlots.length > 0) {
+      const formattedConflicts = conflictingSlots.map(
+        (slot) => `${slot} - ${getEndTime(slot)}`
+      );
+
+      setError(
+        `Följande tider är redan bokade: ${formattedConflicts.join(", ")}`
+      );
+      return;
+    } 
+
     const newBooking = {
       roomId,
       date,
@@ -68,7 +88,20 @@ export default function Booking() {
         </ul>
       </section>
 
-      <form>
+      {error && (
+        <section className="BookingDetails" style={{ color: "red", fontWeight: 600 }}>
+          <p>{error}</p>
+
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+          >
+            Påbörja ny bokning
+          </button>
+        </section>
+      )}
+
+      <form onSubmit={(e) => e.preventDefault()}> 
         <label>
           E-postadress:
           <input
