@@ -3,6 +3,8 @@ import { useState } from "react";
 import useFetch from "../utils/useFetch";
 import type { Room } from "../interfaces/types";
 
+import BookingButton from "../components/BookingButton";
+
 export default function Booking() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
@@ -25,8 +27,7 @@ export default function Booking() {
     return `${String(hour + 1).padStart(2, "0")}:00`;
   }
 
-  async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) { // update for correct event type cause formEvent is to be phased out
-    event.preventDefault();
+  async function handleSubmit(): Promise<void> {
 
     const bookingsResponse = await fetch(`/api/bookings?roomId=${roomId}&date=${date}`);
     const existingBookings = await bookingsResponse.json();
@@ -100,7 +101,7 @@ export default function Booking() {
         </section>
       )}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => e.preventDefault()}> // this prevents the default form submission behavior like Enter key from refreshing the page
         <label>
           E-postadress:
           <input
@@ -110,7 +111,7 @@ export default function Booking() {
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
-        <button type="submit">Bekräfta bokning</button>
+        <BookingButton onBook= {handleSubmit} disabled= {!email}/>
       </form>
     </div>
   );
