@@ -3,7 +3,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router";
 import useFetch from "../utils/useFetch";
 import { allSlots, type Room, type Booking } from "../interfaces/types";
 
-
+import BookingButton from "../components/BookingButton";
 export default function ResourceDetails() {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
@@ -75,13 +75,11 @@ export default function ResourceDetails() {
           })}
         </section>
       </section>
-      <section>
-        <button
-          type="button"
+      <section> 
+        <BookingButton
+          onBook = {handleBooking}
           disabled={selectedSlots.length === 0}
-          onClick={handleBooking}>
-          Boka valda tider
-        </button>
+        />
       </section>
     </div>
   );

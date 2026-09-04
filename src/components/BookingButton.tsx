@@ -1,10 +1,11 @@
-interface bookingButtonProps {
+interface BookingButtonProps {
   onBook: () => void;
+  disabled?:  boolean;
 }
 
-export default function bookingButtonProps({ onBook }: bookingButtonProps) {
+export default function BookingButtonProps({ onBook, disabled = false, }: BookingButtonProps) {
   return (
-    <button type="submit" onClick={onBook}>
+    <button type="button" onClick={onBook} disabled = {disabled}>
       Bekräfta
     </button>
   );
