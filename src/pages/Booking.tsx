@@ -101,7 +101,7 @@ export default function Booking() {
         </section>
       )}
 
-      <form onSubmit={(e) => e.preventDefault()}> // this prevents the default form submission behavior like Enter key from refreshing the page
+      <form onSubmit={(e) => e.preventDefault()}> 
         <label>
           E-postadress:
           <input
