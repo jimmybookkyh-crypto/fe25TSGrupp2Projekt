@@ -81,9 +81,7 @@ h3 {
 /* Sections */
 section,
 .hero,
-.Rooms,
-.BookingDetails
- {
+.BookingDetails {
   background-color: var(--white);
   padding: var(--space-m);
   border-radius: var(--radius-m);
@@ -107,7 +105,7 @@ button[disabled] {
   cursor: not-allowed;
 }
 
-/*  Start */
+/* Start */
 .date-picker section {
   display: flex;
   flex-direction: column;
@@ -130,28 +128,53 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-/* Rooms (resource list) */
+/* Rooms (resource list) - GLOBAL FÖR BÅDE MOBIL OCH DATOR */
 .Rooms {
   display: grid;
   gap: var(--space-m);
   grid-template-columns: 1fr;
+  list-style: none;
+  padding: var(--space-m);
+  background-color: var(--white);
+  border-radius: var(--radius-m);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: var(--space-m);
 }
 
 .Rooms li {
   margin: 0;
   padding: 0;
+  display: block;
 }
 
 .Rooms li button {
+  width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
   background-color: var(--burnt-orange);
   color: var(--white);
-  padding: var(--space-m);
+  padding: var(--space-s) var(--space-m) !important;
+  border: none;
   border-radius: var(--radius-m);
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.25rem !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+/* Nollställ marginaler på texten i BÅDE mobil och dator */
+.Rooms li button h2,
+.Rooms li button p {
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.Rooms li button h2 {
+  font-size: 1.25rem;
 }
 
 /* Resource Details */
@@ -165,7 +188,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .time-slots {
   display: flex;
   gap: 0.6rem;
-  /* stort mellanrum */
   margin-top: 0.5rem;
 }
 
@@ -183,19 +205,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   transition: 0.2s ease;
 }
 
-/* selected time */
 .time-slot.selected {
   background-color: var(--burnt-orange);
   color: var(--white);
   border-color: var(--burnt-orange);
 }
 
-/* Hover-effect */
 .time-slot:hover {
   background-color: #ffe6cc;
 }
 
-/* Booking page*/
+/* Booking page */
 .BookingPage form {
   background-color: var(--white);
   padding: var(--space-m);
@@ -213,7 +233,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: var(--white);
 }
 
-/* Confirm Booking Section (booking page) */
 .confirm-booking-section {
   display: flex;
   flex-direction: column;
@@ -226,10 +245,9 @@ label {
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
-  margin-bottom: var(--space-m); /* Detta trycker ner knappen */
+  margin-bottom: var(--space-m);
 }
 
-/*e-postfältet*/
 input[type="email"] {
   padding: 0.8rem 1rem;
   border: 2px solid var(--burnt-orange);
@@ -246,14 +264,13 @@ input[type="email"] {
   gap: var(--space-l);
 }
 
-.BookingConfirmationPage .confirmation-details {
+.booking-details {
   background-color: var(--white);
   padding: var(--space-m);
   border-radius: var(--radius-m);
+  line-height: 1.6;
+  margin-bottom: var(--space-m);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-s);
 }
 
 .BookingConfirmationPageBtn {
@@ -282,8 +299,6 @@ dialog.BookingConfirmationPageCancelBtn {
   margin-top: var(--space-s);
 }
 
-
-
 /* RESPONSIVE DESIGN */
 @media (min-width: 768px) {
   main {
@@ -291,68 +306,27 @@ dialog.BookingConfirmationPageCancelBtn {
     margin: 0 auto;
   }
 
-       .Rooms {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--space-m);
-}
+  .Rooms {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-.Rooms li {
-  display: block; 
-}
-
-.Rooms li button {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  text-align: left;
-  padding: var(--space-s) var(--space-m); 
-  background-color: var(--burnt-orange);
-  color: var(--white);
-  border: none;
-  border-radius: var(--radius-m);
-  cursor: pointer;
-  gap: 0.25rem; 
-}
-
-
-.Rooms li button h2,
-.Rooms li button p {
-  margin: 0 !important;
-  line-height: 1.2;
-}
-
-.Rooms li button h2 {
-  font-size: 1.25rem;
-}
-
-.booking-details {
-  background-color: var(--white);
-  padding: var(--space-m);
-  border-radius: var(--radius-m);
-  line-height: 1.6;
-  margin-bottom: var(--space-m);
-}
-
-    .time-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.4rem;
-    }
+  .time-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem;
+  }
 }
 
 @media (min-width: 1200px) {
   main {
     max-width: 1100px;
   }
+
   .Rooms {
     grid-template-columns: repeat(3, 1fr);
   }
- .time-slots {
+
+  .time-slots {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
