@@ -3,6 +3,8 @@ import { useState } from "react";
 import useFetch from "../utils/useFetch";
 import type { Room } from "../interfaces/types";
 
+import BookingButton from "../components/BookingButton";
+
 export default function Booking() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
@@ -24,8 +26,7 @@ export default function Booking() {
     return `${String(hour + 1).padStart(2, "0")}:00`;
   }
 
-  async function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
+  async function handleSubmit(): Promise<void> {
     const newBooking = {
       roomId,
       date,
@@ -67,7 +68,7 @@ export default function Booking() {
         </ul>
       </section>
 
-      <form onSubmit={handleSubmit}>
+      <form>
         <label>
           E-postadress:
           <input
@@ -77,7 +78,7 @@ export default function Booking() {
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
-        <button type="submit">Bekräfta bokning</button>
+        <BookingButton onBook= {handleSubmit} disabled= {!email}/>
       </form>
     </div>
   );
