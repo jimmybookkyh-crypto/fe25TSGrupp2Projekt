@@ -2,6 +2,7 @@ import { useSearchParams, useNavigate } from "react-router";
 import { useState } from "react";
 import useFetch from "../utils/useFetch";
 import type { Room } from "../interfaces/types";
+import BookingButton from "../components/BookingButton";
 
 export default function Booking() {
   const navigate = useNavigate();
@@ -77,7 +78,7 @@ export default function Booking() {
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
-        <button type="submit">Bekräfta bokning</button>
+        <BookingButton onBook={() => {}} />
       </form>
     </div>
   );
