@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router";
 import useFetch from "../utils/useFetch";
-import { allSlots, type Room, type Booking } from "../interfaces/types";
+import { allSlots, type Room, type Booking, type SlotItem } from "../interfaces/types";
 import GenericList from "../components/GenericList";
 
 import BookingButton from "../components/BookingButton";
@@ -12,7 +12,7 @@ export default function ResourceDetails() {
   const [selectedSlots, setSelectedSlots] = useState<string[]>([]);
   const navigate = useNavigate();
 
-  const slotItems = allSlots.map((slot) => ({
+  const slotItems: SlotItem[] = allSlots.map((slot) => ({
     id: slot,
     slot,
   }));
@@ -124,8 +124,11 @@ export default function ResourceDetails() {
         />
       </section>
 
-      <h2>Redan bokade tider detta datum</h2>
-      <GenericList items={bookings} renderItem={renderBooking} />
+      { bookings.length > 0 && (<>
+          <h2>Redan bokade tider detta datum</h2>
+          <GenericList items={bookings} renderItem={renderBooking} />
+          </>)
+      }
     </div>
   );
 }
