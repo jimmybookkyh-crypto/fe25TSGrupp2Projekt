@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 export default function Start() {
   const [date, setDate] = useState("");
   const navigate = useNavigate();
+  const today = new Date().toISOString().split("T")[0];
 
   function handleDateChange(event: React.ChangeEvent<HTMLInputElement>) {
     const selectedDate = event.target.value;
@@ -18,10 +19,10 @@ export default function Start() {
   return (
     <div>
       <section className="date-picker">
-      <h1>Boka Rum</h1>
-      <p>Välj datum</p>
-        <input type="date" value={date} onChange={handleDateChange} />
-        </section>
+        <h1>Boka Rum</h1>
+        <p>Välj datum</p>
+        <input type="date" value={date} min={today} onChange={handleDateChange} />
+      </section> 
     </div>
   );
 }

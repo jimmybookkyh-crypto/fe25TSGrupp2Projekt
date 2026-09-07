@@ -13,6 +13,10 @@ export interface Booking {
   email: string;
   bookingStatus: "confirmed" | "cancelled";
 }
+export interface SlotItem {
+  id: string;
+  slot: string;
+}
 
 export type newBooking = Omit<Booking, "id">;
 
