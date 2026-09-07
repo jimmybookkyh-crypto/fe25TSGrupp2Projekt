@@ -16,15 +16,6 @@
   --font-base: system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-/* 1. Global Reset & Box Sizing */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-html, body, #root {
-  min-height: 100vh;
-}
-
 /* Global */
 body {
   margin: 0;
@@ -36,9 +27,6 @@ body {
 
 main {
   padding: var(--space-m);
-  width: 100%;
-  max-width: 1100px; 
-  margin: 0 auto;
 }
 
 ul {
@@ -62,6 +50,16 @@ header h1 {
   font-size: 1.6rem;
 }
 
+header .back-btn {
+  background: transparent;
+  border: 2px solid var(--white);
+  color: var(--white);
+  padding: var(--space-s) var(--space-m);
+  border-radius: var(--radius-s);
+  font-weight: 600;
+  cursor: pointer;
+}
+
 /* Headings */
 h1 {
   font-size: 1.8rem;
@@ -81,7 +79,9 @@ h3 {
 /* Sections */
 section,
 .hero,
-.BookingDetails {
+.Rooms,
+.BookingDetails,
+.BokningsbekrÃ¤ftelse {
   background-color: var(--white);
   padding: var(--space-m);
   border-radius: var(--radius-m);
@@ -105,7 +105,7 @@ button[disabled] {
   cursor: not-allowed;
 }
 
-/* Start */
+/*  Start */
 .date-picker section {
   display: flex;
   flex-direction: column;
@@ -128,53 +128,43 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-/* Rooms (resource list) - GLOBAL FÖR BÅDE MOBIL OCH DATOR */
+/* Rooms (resource list) */
 .Rooms {
   display: grid;
   gap: var(--space-m);
   grid-template-columns: 1fr;
-  list-style: none;
-  padding: var(--space-m);
-  background-color: var(--white);
-  border-radius: var(--radius-m);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  margin-bottom: var(--space-m);
+  grid-auto-rows: 1fr;
 }
 
 .Rooms li {
   margin: 0;
   padding: 0;
-  display: block;
 }
 
 .Rooms li button {
   width: 100%;
-  height: auto !important;
-  min-height: 0 !important;
+  height: 100%;
   background-color: var(--burnt-orange);
   color: var(--white);
-  padding: var(--space-s) var(--space-m) !important;
-  border: none;
+  padding: var(--space-s);
   border-radius: var(--radius-m);
   text-align: left;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 0.25rem !important;
+  gap: var(--space-s);
+  font-weight: 200;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
+}
+.Rooms p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.2rem;
 }
 
-/* Nollställ marginaler på texten i BÅDE mobil och dator */
-.Rooms li button h2,
-.Rooms li button p {
-  margin: 0 !important;
-  line-height: 1.2 !important;
-}
-
-.Rooms li button h2 {
-  font-size: 1.25rem;
+.Rooms h2
+{
+  margin: 0;
+  font-size: 1.2rem;
 }
 
 /* Resource Details */
@@ -205,17 +195,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   transition: 0.2s ease;
 }
 
+/* selected time */
 .time-slot.selected {
   background-color: var(--burnt-orange);
   color: var(--white);
   border-color: var(--burnt-orange);
 }
 
+/* Hover-effect */
 .time-slot:hover {
   background-color: #ffe6cc;
 }
 
-/* Booking page */
+/* Booking page*/
 .BookingPage form {
   background-color: var(--white);
   padding: var(--space-m);
@@ -224,6 +216,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   gap: var(--space-m);
+  margin-bottom: var(--space-m);
+}
+
+form.BookingPage button {
+  margin-top: var(--space-s);
 }
 
 .BookingPage input[type="email"] {
@@ -233,6 +230,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: var(--white);
 }
 
+/* Confirm Booking Section (booking page) */
 .confirm-booking-section {
   display: flex;
   flex-direction: column;
@@ -245,16 +243,15 @@ label {
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
-  margin-bottom: var(--space-m);
+  font-weight: 600;
+  width: 100%;
 }
 
-input[type="email"] {
-  padding: 0.8rem 1rem;
+.confirm-booking-section input[type="email"] {
+  padding: 1rem;
   border: 2px solid var(--burnt-orange);
   border-radius: var(--radius-m);
   background-color: var(--white);
-  font-size: 1rem;
-  width: 100%;
 }
 
 /* Booking Confirmation Page */
@@ -264,13 +261,24 @@ input[type="email"] {
   gap: var(--space-l);
 }
 
+.BookingConfirmationPage .confirmation-details {
+  background-color: var(--white);
+  padding: var(--space-m);
+  border-radius: var(--radius-m);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
 .booking-details {
   background-color: var(--white);
   padding: var(--space-m);
   border-radius: var(--radius-m);
-  line-height: 1.6;
-  margin-bottom: var(--space-m);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: var(--space-m);
+  line-height: 1.6;
+  border: 2px solid var(--burnt-orange);
 }
 
 .BookingConfirmationPageBtn {
@@ -279,6 +287,14 @@ input[type="email"] {
   align-items: center;
   margin-top: var(--space-m); 
   justify-content: center;
+}
+
+.BookingConfirmationPageCancelBtn .cancelBtn {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-m);
+  justify-content: center;
+  margin-top: var(--space-s);
 }
 
 dialog.BookingConfirmationPageCancelBtn {
@@ -291,12 +307,13 @@ dialog.BookingConfirmationPageCancelBtn {
   text-align: center;
 }
 
-.BookingConfirmationPageCancelBtn .cancelBtn {
-  display: flex;
-  flex-direction: row;
-  gap: var(--space-m);
-  justify-content: center;
-  margin-top: var(--space-s);
+.cancel-button {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: var(--burnt-orange);
+  color: var(--white);
+  border-radius: var(--radius-m);
+  font-weight: 600;
 }
 
 /* RESPONSIVE DESIGN */
@@ -308,7 +325,24 @@ dialog.BookingConfirmationPageCancelBtn {
 
   .Rooms {
     grid-template-columns: repeat(2, 1fr);
+    
   }
+
+.Rooms li button {
+      padding: 1rem 1.2rem;
+     
+    }
+
+  .Rooms p {
+      margin: 1rem 0 0.5rem 0;
+      font-size: 1rem;
+      line-height: 1.2rem;
+    }
+  
+  .Rooms h2 {
+      margin: 1rem 0 0.5rem 0;
+      font-size: 1.2rem;
+    }
 
   .time-list {
     display: grid;
@@ -317,16 +351,13 @@ dialog.BookingConfirmationPageCancelBtn {
   }
 }
 
-@media (min-width: 1200px) {
-  main {
-    max-width: 1100px;
-  }
-
+@media (min-width: 1100px) {
   .Rooms {
     grid-template-columns: repeat(3, 1fr);
   }
 
   .time-slots {
+    flex-wrap: wrap;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }

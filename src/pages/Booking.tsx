@@ -102,7 +102,7 @@ export default function Booking() {
         </section>
       )}
 
-      <form onSubmit={(e) => e.preventDefault()}> 
+      <form className="BookingPage" onSubmit={(e) => e.preventDefault()}> 
         <label>
           E-postadress:
           <input
