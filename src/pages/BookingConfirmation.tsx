@@ -1,17 +1,13 @@
 import { useState } from "react";
 import { useLocation, Link } from "react-router";
 import type { Booking, Room } from "../interfaces/types";
-//Datum, rum och tid som är bokade.
-
-//en funktion state variabel för useLcation och attribus som ska hämtas
-//if för return som kollar vad det finns för state och gör en navigate till URL som replace som lägger in informationen som finns.
 
 export default function BookingConfirmation() {
-  const { state } = useLocation(); //Ta emot data från Booking.tsx
-  if (!state) { // Felhantering om sidan skulle laddas utan bokningsdata följer med
-    return <p>Ett fel har uppstått</p>
+  const { state } = useLocation();
+  if (!state) {
+    return <p>Ett fel har uppstått</p>;
   }
-  
+
   const { room, booking } = state as {
     room: Room;
     booking: Booking;
@@ -21,23 +17,20 @@ export default function BookingConfirmation() {
   }
 
   const [showConfirm, setShowConfirm] = useState(false);
-  const [cancelled, setCancelled] = useState(false); 
+  const [cancelled, setCancelled] = useState(false);
 
   async function handleCancel() {
-  
     const response = await fetch(`/api/bookings/${booking.id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ bookingStatus: "cancelled" })
+      body: JSON.stringify({ bookingStatus: "cancelled" }),
     });
 
     if (!response.ok) return;
 
     setCancelled(true);
     setShowConfirm(false);
-
-}
-
+  }
 
   return (
     <div>
@@ -47,11 +40,10 @@ export default function BookingConfirmation() {
 
       {cancelled ? (
         <>
-          <p>Tiden avbokad</p>
+          <h2>Din tid är nu avbokad!</h2>
+          <p>För att boka på nytt gå till startsidan.</p>
           <Link to="/">
-            <button type="button">
-              Till start
-            </button>
+            <button type="button">Tillbaka till start</button>
           </Link>
         </>
       ) : 

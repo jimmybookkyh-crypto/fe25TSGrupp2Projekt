@@ -15,7 +15,7 @@ export default function ResourceList() {
   }
   function isRoomFullyBooked(roomId: string) {
     if (!bookings) return false;
-    const roomBookings = bookings.filter((b) => b.roomId === roomId);
+    const roomBookings = bookings.filter((b) => b.roomId === roomId && b.bookingStatus === "confirmed"); //
     const bookedSlots = roomBookings.flatMap((b) => b.slots);
 
     return allSlots.every((slot) => bookedSlots.includes(slot));
