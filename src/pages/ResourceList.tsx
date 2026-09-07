@@ -1,6 +1,7 @@
 import { useSearchParams, useNavigate } from "react-router";
 import useFetch from "../utils/useFetch";
 import type { Room, Booking } from "../interfaces/types";
+import GenericList from "../components/GenericList";
 import { allSlots } from "../interfaces/types";
 
 export default function ResourceList() {
@@ -15,12 +16,26 @@ export default function ResourceList() {
   }
   function isRoomFullyBooked(roomId: string) {
     if (!bookings) return false;
-    const roomBookings = bookings.filter((b) => b.roomId === roomId && b.bookingStatus === "confirmed"); //
+    const roomBookings = bookings.filter(
+      (b) => b.roomId === roomId && b.bookingStatus === "confirmed",
+    ); //
     const bookedSlots = roomBookings.flatMap((b) => b.slots);
 
     return allSlots.every((slot) => bookedSlots.includes(slot));
   }
   const availableRooms = rooms?.filter((room) => !isRoomFullyBooked(room.id));
+
+  function renderRoom({ id, name, capacity, equipment }: Room) {
+    return (
+      <article key={id}>
+        <button onClick={() => navigate(`/resources/${id}?date=${date}`)}>
+          <h2>{name}</h2>
+          <p>Rummets kapacitet: {capacity} personer</p>
+          <p>Rummets utrustning: {equipment}</p>
+        </button>
+      </article>
+    );
+  }
 
   return (
     <div>
@@ -33,6 +48,9 @@ export default function ResourceList() {
         )}
       </section>
       <ul className="Rooms">
+        <GenericList items={rooms} renderItem={renderRoom} />
+
+        {/* {" "}
         {availableRooms.map((room) => (
           <li key={room.id}>
             <button
@@ -43,7 +61,8 @@ export default function ResourceList() {
               <p>Rummets utrustning: {room.equipment}</p>
             </button>
           </li>
-        ))}
+        ))}{" "}
+         */}
       </ul>
     </div>
   );
