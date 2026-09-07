@@ -18,7 +18,7 @@ export interface SlotItem {
   slot: string;
 }
 
-export type newBooking = Omit<Booking, "id">;
+export type NewBooking = Omit<Booking, "id">;
 
 
 export const allSlots = [
