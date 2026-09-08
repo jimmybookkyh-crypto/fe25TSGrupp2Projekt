@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-//import "./index.css"; 
 
 export default function Start() {
   const [date, setDate] = useState("");
@@ -21,8 +20,13 @@ export default function Start() {
       <section className="date-picker">
         <h1>Boka Rum</h1>
         <p>Välj datum</p>
-        <input type="date" value={date} min={today} onChange={handleDateChange} />
-      </section> 
+        <input
+          type="date"
+          value={date}
+          min={today}
+          onChange={handleDateChange}
+        />
+      </section>
     </div>
   );
 }

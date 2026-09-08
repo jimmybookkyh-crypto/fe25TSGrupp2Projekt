@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router";
 import useFetch from "../utils/useFetch";
-import { allSlots, type Room, type Booking, type SlotItem } from "../interfaces/types";
+import {
+  allSlots,
+  type Room,
+  type Booking,
+  type SlotItem,
+} from "../interfaces/types";
 import GenericList from "../components/GenericList";
 
 import BookingButton from "../components/BookingButton";
@@ -58,6 +63,11 @@ export default function ResourceDetails() {
       </article>
     );
   }
+
+  const confirmedBookings = bookings.filter(
+    (booking) => booking.bookingStatus === "confirmed",
+  );
+
   return (
     <div>
       <section className="hero">
@@ -97,28 +107,6 @@ export default function ResourceDetails() {
               );
             }}
           />
-
-          {/* {allSlots.map((startTime) => {
-            const hour = Number(startTime.slice(0, 2));
-            const endTime = `${String(hour + 1).padStart(2, "0")}:00`;
-            const booked = isBooked(startTime);
-            if (booked) {
-              return null;
-            }
-            const selected = selectedSlots.includes(startTime);
-
-            return (
-              <button
-                key={startTime}
-                type="button"
-                className={`time-slot ${selected ? "selected" : ""}`}
-                onClick={() => toggleSlot(startTime)}
-                aria-pressed={selected}
-              >
-                {startTime} - {endTime}
-              </button> */}
-          {/* );
-          })} */}
         </section>
       </section>
       <section className="booking-confirm">
@@ -128,11 +116,12 @@ export default function ResourceDetails() {
         />
       </section>
 
-      { bookings.length > 0 && (<>
+      {confirmedBookings.length > 0 && (
+        <>
           <h2>Redan bokade tider detta datum</h2>
-          <GenericList items={bookings} renderItem={renderBooking} />
-          </>)
-      }
+          <GenericList items={confirmedBookings} renderItem={renderBooking} />
+        </>
+      )}
     </div>
   );
 }
