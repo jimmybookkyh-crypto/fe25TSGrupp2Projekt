@@ -18,7 +18,7 @@ export default function ResourceList() {
     if (!bookings) return false;
     const roomBookings = bookings.filter(
       (b) => b.roomId === roomId && b.bookingStatus === "confirmed",
-    ); //
+    );
     const bookedSlots = roomBookings.flatMap((b) => b.slots);
 
     return allSlots.every((slot) => bookedSlots.includes(slot));
@@ -48,21 +48,7 @@ export default function ResourceList() {
         )}
       </section>
       <ul className="Rooms">
-        <GenericList items={rooms} renderItem={renderRoom} />
-
-        {/* {" "}
-        {availableRooms.map((room) => (
-          <li key={room.id}>
-            <button
-              onClick={() => navigate(`/resources/${room.id}?date=${date}`)}
-            >
-              <h2>{room.name}</h2>
-              <p>Rummets kapacitet: {room.capacity} personer</p>
-              <p>Rummets utrustning: {room.equipment}</p>
-            </button>
-          </li>
-        ))}{" "}
-         */}
+        <GenericList items={availableRooms} renderItem={renderRoom} />
       </ul>
     </div>
   );

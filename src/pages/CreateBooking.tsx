@@ -18,8 +18,6 @@ export default function CreateBooking() {
 
   const [room, loading] = useFetch<Room>(`/api/rooms/${roomId}`);
 
- 
-
   if (!room || loading) {
     return <p>Laddar...</p>;
   }
@@ -30,24 +28,26 @@ export default function CreateBooking() {
   }
 
   async function handleSubmit(): Promise<void> {
-
-    const bookingsResponse = await fetch(`/api/bookings?roomId=${roomId}&date=${date}`);
+    const bookingsResponse = await fetch(
+      `/api/bookings?roomId=${roomId}&date=${date}`,
+    );
     const existingBookings: Booking[] = await bookingsResponse.json();
 
     const alreadyBookedSlots = existingBookings
       .filter((booking) => booking.bookingStatus === "confirmed")
       .flatMap((booking) => booking.slots);
 
-
-    const conflictingSlots = slots.filter((slot) => alreadyBookedSlots.includes(slot));
+    const conflictingSlots = slots.filter((slot) =>
+      alreadyBookedSlots.includes(slot),
+    );
 
     if (conflictingSlots.length > 0) {
       const formattedConflicts = conflictingSlots.map(
-        (slot) => `${slot} - ${getEndTime(slot)}`
+        (slot) => `${slot} - ${getEndTime(slot)}`,
       );
 
       setError(
-        `Följande tider är redan bokade: ${formattedConflicts.join(", ")}`
+        `Följande tider är redan bokade: ${formattedConflicts.join(", ")}`,
       );
       return;
     }
@@ -62,18 +62,8 @@ export default function CreateBooking() {
       date,
       slots,
       email,
-      bookingStatus: "confirmed"
+      bookingStatus: "confirmed",
     };
-
-    /*Omit gör att vi slipper duplicera typdefinitioner.
-    Vi återanvänder Booking och tar bort id, vilket ger oss NewBooking.
-
-    När vi skapar ett nytt bokningsobjekt måste vi fortfarande skriva ut fälten (roomId, date, slots, email, bookingStatus) eftersom typer i TypeScript inte skapar objekt — de beskriver bara formen.
-
-    Det är alltså inte duplicering av typstrukturen, utan helt enkelt att skapa den faktiska data som ska skickas till API:t.
-
-    NewBooking är effektiv typåteranvändning, och objektet är bara data. De är två olika saker
-    .*/
 
     const response = await fetch("/api/bookings", {
       method: "POST",
@@ -90,8 +80,8 @@ export default function CreateBooking() {
   return (
     <div>
       <section className="hero">
-      <h1>Boknings detaljer</h1>
-</section>
+        <h1>Boknings detaljer</h1>
+      </section>
 
       <section className="BookingDetails">
         <h2>Rummets namn: {room.name}</h2>
@@ -111,13 +101,13 @@ export default function CreateBooking() {
       </section>
 
       {error && (
-        <section className="BookingDetails" style={{ color: "red", fontWeight: 600 }}>
+        <section
+          className="BookingDetails"
+          style={{ color: "red", fontWeight: 600 }}
+        >
           <p>{error}</p>
 
-          <button
-            type="button"
-            onClick={() => navigate("/")}
-          >
+          <button type="button" onClick={() => navigate("/")}>
             Påbörja ny bokning
           </button>
         </section>
