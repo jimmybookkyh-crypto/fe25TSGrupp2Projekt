@@ -60,6 +60,9 @@ export default function ResourceDetails() {
   }
   return (
     <div>
+      <section className="hero">
+        <h1>Rumdetaljer</h1>
+      </section>
       <section>
         <h2>{room.name}</h2>
         <p>Datum: {date}</p>
@@ -69,7 +72,7 @@ export default function ResourceDetails() {
 
       <section>
         <h2>Lediga tider</h2>
-        <section>
+        <section className="time-list">
           <GenericList
             items={slotItems}
             wrapList={false}
@@ -108,6 +111,7 @@ export default function ResourceDetails() {
               <button
                 key={startTime}
                 type="button"
+                className={`time-slot ${selected ? "selected" : ""}`}
                 onClick={() => toggleSlot(startTime)}
                 aria-pressed={selected}
               >

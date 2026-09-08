@@ -34,7 +34,7 @@ export default function BookingConfirmation() {
 
   return (
     <div>
-      <section className="Bokningsbekräftelse">
+      <section className="hero">
         <h1>Bokningsbekräftelse</h1>
       </section>
 
@@ -46,37 +46,44 @@ export default function BookingConfirmation() {
             <button type="button">Tillbaka till start</button>
           </Link>
         </>
-      ) : (
-        <>
-          <p className="Rooms">
-            Rummets namn: {room.name} <br />
-            Datum: {booking.date} <br />
-            Bokade tider: {booking.slots.join(", ")} <br />
-            Utrustning: {room.equipment} <br />
-            E-post: {booking.email} <br />
+      ) : 
+      <>
+      <p className="booking-details">
+        Rum: {room.name} <br />
+        Datum: {booking.date} <br />
+        Tider: {booking.slots.join(", ")} <br />
+        Utrustning: {room.equipment} <br />
+        E-post: {booking.email} <br />
           </p>
-          <button type="button" onClick={() => setShowConfirm(true)}>
-            Avboka min bokning
-          </button>
 
-          {showConfirm && (
-            <dialog open>
-              <h2>Avbokning</h2>
-              <p>Är du säker att du vill avboka din bokning?</p>
-              <button type="button" onClick={handleCancel}>
-                Ja
-              </button>
-              <button type="button" onClick={() => setShowConfirm(false)}>
-                Nej
-              </button>
-            </dialog>
-          )}
-          <br />
+        <div className="BookingConfirmationPageBtn">
           <Link to="/">
-            <button type="button">Tillbaka till start</button>
-          </Link>
-        </>
-      )}
+            <button type="button">
+             Till start
+            </button>
+             </Link>
+           <button type ="button"
+            onClick={() => setShowConfirm(true)}>
+            Avboka
+            </button>
+        </div>
+
+      {showConfirm && (
+  <dialog open className="BookingConfirmationPageCancelBtn">
+    <p>Avboka?</p>
+    <div className="cancelBtn">
+      <button type="button" onClick={handleCancel}>
+        Ja
+      </button>
+      <button type="button" onClick={() => setShowConfirm(false)}>
+        Nej
+      </button>
+    </div>
+  </dialog>
+)}
+      
+          </>
+    }
     </div>
   );
 }
