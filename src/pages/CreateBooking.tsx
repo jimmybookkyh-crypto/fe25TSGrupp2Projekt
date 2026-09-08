@@ -1,7 +1,7 @@
 import { useSearchParams, useNavigate } from "react-router";
 import { useState } from "react";
 import useFetch from "../utils/useFetch";
-import type { Room , Booking} from "../interfaces/types";
+import type { Room, Booking, NewBooking } from "../interfaces/types";
 
 import BookingButton from "../components/BookingButton";
 
@@ -17,6 +17,8 @@ export default function CreateBooking() {
   const [error, setError] = useState("");
 
   const [room, loading] = useFetch<Room>(`/api/rooms/${roomId}`);
+
+ 
 
   if (!room || loading) {
     return <p>Laddar...</p>;
@@ -35,7 +37,7 @@ export default function CreateBooking() {
     const alreadyBookedSlots = existingBookings
       .filter((booking) => booking.bookingStatus === "confirmed")
       .flatMap((booking) => booking.slots);
-  
+
 
     const conflictingSlots = slots.filter((slot) => alreadyBookedSlots.includes(slot));
 
@@ -48,15 +50,30 @@ export default function CreateBooking() {
         `Följande tider är redan bokade: ${formattedConflicts.join(", ")}`
       );
       return;
-    } 
+    }
 
-    const newBooking = {
+    if (!roomId || !date) {
+      setError("Ogiltig bokning. Kontrollera att alla fält är ifyllda.");
+      return;
+    }
+
+    const newBooking: NewBooking = {
       roomId,
       date,
       slots,
       email,
-      bookingStatus: "confirmed",
+      bookingStatus: "confirmed"
     };
+
+    /*Omit gör att vi slipper duplicera typdefinitioner.
+    Vi återanvänder Booking och tar bort id, vilket ger oss NewBooking.
+
+    När vi skapar ett nytt bokningsobjekt måste vi fortfarande skriva ut fälten (roomId, date, slots, email, bookingStatus) eftersom typer i TypeScript inte skapar objekt — de beskriver bara formen.
+
+    Det är alltså inte duplicering av typstrukturen, utan helt enkelt att skapa den faktiska data som ska skickas till API:t.
+
+    NewBooking är effektiv typåteranvändning, och objektet är bara data. De är två olika saker
+    .*/
 
     const response = await fetch("/api/bookings", {
       method: "POST",
@@ -104,7 +121,7 @@ export default function CreateBooking() {
         </section>
       )}
 
-      <form onSubmit={(e) => e.preventDefault()}> 
+      <form onSubmit={(e) => e.preventDefault()}>
         <label>
           E-postadress:
           <input
@@ -114,7 +131,7 @@ export default function CreateBooking() {
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
-        <BookingButton onBook= {handleSubmit} disabled= {!email}/>
+        <BookingButton onBook={handleSubmit} disabled={!email} />
       </form>
     </div>
   );
