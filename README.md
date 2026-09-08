@@ -1,32 +1,60 @@
-# React + TypeScript + Vite
+# Libery Trollständan
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Welcome to our page for booking of meetingrooms.
 
-Currently, two official plugins are available:
+Features:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Select date: Filter available meeting rooms by desired date.
+- Room overview: View room capacity and equipment (projector, whiteboard, etc.); fully booked rooms are removed from the UI.
+- Time management: Select one or more available time slots (09:00–17:00).
+- Double-booking protection: Server-side check that prevents the same time slot from being booked twice.
+- Booking confirmation & cancellation: View booking details and cancel bookings directly via a dialog.
 
-## React Compiler
+Root level is a Vite + React + TypeScript project.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+As a backend we use our own db.json server.
 
-## Expanding the Oxlint configuration
+## Teknikstack
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- Node.js
+- React Router v8 i data mode
+- React vite TypeScript
+- Concurrently
+- Vanilla CSS - We chose vanilla CSS since the project is small and time is limited. It also gave us more time to spend on responsive design.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## Installation
+
+```bash
+# Klona repot
+git clone [https://github.com/jimmybookkyh-crypto/fe25TSGrupp2Projekt.git]
+cd [fe25TSGrupp2Projekt]
+
+
+### Install dependencies
+To install all dependencies
+
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+npm install
+
+```
+### Start the dev environment
+In the root folder run
+```
+
+npm start
+Json-Server `http://localhost:5173`.
+API starts at `http://localhost:3000`.
+
+```
+## Gruppmedlemmar
+
+| Namn   (GitName)                          | Datum  | Signatur / OK |
+| ------------------------------------------| -------| --------------|
+| Angelica Jonsson Landström (AngelicaJL97) | 260827 | OK 🌞         |
+| William Engman (WilliamEngman24)          | 260827 | OK 🚙         |
+| Eva Maria Köning (MrsKoning)              | 260827 | OK 😂         |
+| Jimmy Book (jimmybookkyh-crypto)          | 260827 | OK 📘         |
+| Tommy Hultén (Tomhul)                     | 260827 | OK 🐶         |
+
+```
