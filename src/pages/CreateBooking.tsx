@@ -89,7 +89,9 @@ export default function CreateBooking() {
   }
   return (
     <div>
+      <section className="hero">
       <h1>Boknings detaljer</h1>
+</section>
 
       <section className="BookingDetails">
         <h2>Rummets namn: {room.name}</h2>

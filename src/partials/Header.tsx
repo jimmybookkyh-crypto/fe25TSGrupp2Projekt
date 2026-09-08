@@ -1,6 +1,6 @@
 
 export default function Header() {
     return <header>
-        HEADER
+        <h1>Trollsländan</h1>
     </header>;
 }
