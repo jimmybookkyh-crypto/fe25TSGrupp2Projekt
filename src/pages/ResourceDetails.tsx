@@ -121,7 +121,7 @@ export default function ResourceDetails() {
           })} */}
         </section>
       </section>
-      <section>
+      <section className="booking-confirm">
         <BookingButton
           onBook={handleBooking}
           disabled={selectedSlots.length === 0}

@@ -1,6 +1,6 @@
 
 export default function Footer() {
     return <footer>
-        FOOTER
+       <p> @ 2026 trollsländan </p>
     </footer>
 }

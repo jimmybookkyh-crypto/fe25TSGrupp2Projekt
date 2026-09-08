@@ -17,6 +17,12 @@
 }
 
 /* Global */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -26,8 +32,9 @@ body {
 }
 
 main {
-  padding: var(--space-m);
-}
+  padding: var(--space-m);}
+
+
 
 ul {
   list-style: none;
@@ -35,7 +42,7 @@ ul {
   margin: 0;
 }
 
-/* Header */
+/* Header & footer */
 header {
   background-color: var(--burnt-orange);
   color: var(--text-light);
@@ -50,53 +57,51 @@ header h1 {
   font-size: 1.6rem;
 }
 
-header .back-btn {
-  background: transparent;
-  border: 2px solid var(--white);
-  color: var(--white);
-  padding: var(--space-s) var(--space-m);
-  border-radius: var(--radius-s);
-  font-weight: 600;
-  cursor: pointer;
+footer {
+  background-color: var(--burnt-orange);
+  color: var(--text-light);
+  padding: var(--space-m);
+  margin-top: auto;
 }
 
 /* Headings */
 h1 {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   margin-bottom: var(--space-m);
 }
 
 h2 {
-  font-size: 1.4rem;
-  margin-bottom: var(--space-s);
-}
-
-h3 {
   font-size: 1.2rem;
   margin-bottom: var(--space-s);
 }
 
+h3 {
+  font-size: 1.0rem;
+  margin-bottom: var(--space-s);
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: var(--space-xs);
+}
+
 /* Sections */
 section,
-.hero,
-.Rooms,
-.BookingDetails,
-.BokningsbekrÃ¤ftelse {
+.hero {
   background-color: var(--white);
   padding: var(--space-m);
   border-radius: var(--radius-m);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  margin-bottom: var(--space-m);
+  margin: var(--space-m) auto;
+  max-width: 1000px;
 }
 
 /* Buttons */
 button {
   padding: 0.8rem 1.2rem;
-  background-color: var(--burnt-orange);
-  color: var(--text-light);
   border: none;
   border-radius: var(--radius-s);
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
 }
 
@@ -105,110 +110,103 @@ button[disabled] {
   cursor: not-allowed;
 }
 
+
+
 /*  Start */
 .date-picker section {
   display: flex;
   flex-direction: column;
   gap: var(--space-s);
+  width: 100%;
 }
 
 .date-picker input[type="date"] {
-  padding: 0.8rem 1rem;
-  border: 2px solid var(--burnt-orange);
-  border-radius: var(--radius-m);
-  background-color: var(--white);
-  font-size: 1rem;
-  width: 100%;
-  box-sizing: border-box;
-}
+  padding: 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--burnt-orange);
+    border-radius: var(--radius-m);
+    background-color: var(--white);
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  width: 1.2rem;
-  height: 1.2rem;
+.date-picker input[type="date"]::-webkit-calendar-picker-indicator {
+  width: 1.6rem;
+  height: 1.6rem;
   cursor: pointer;
+  filter: invert(40%) sepia(80%) saturate(200%) hue-rotate(350deg);
 }
 
 /* Rooms (resource list) */
-.Rooms {
+.Rooms .list {
   display: grid;
   gap: var(--space-m);
   grid-template-columns: 1fr;
-  grid-auto-rows: 1fr;
 }
 
-.Rooms li {
-  margin: 0;
-  padding: 0;
+.Rooms article {
+  display: block;
 }
 
-.Rooms li button {
+.Rooms article button {
+  background-color: var(--burnt-orange);
+  color: var(--text-light);
+  padding: var(--space-xs);
+  border: 2px solid var(--burnt-orange);
+  border-radius: var(--radius-m);
+  margin-bottom: var(--space-s);
   width: 100%;
   height: 100%;
-  background-color: var(--burnt-orange);
-  color: var(--white);
-  padding: var(--space-s);
-  border-radius: var(--radius-m);
   text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-s);
-  font-weight: 200;
+  line-height: var(--space-m);
+  border-radius: var(--radius-m);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
-.Rooms p {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.2rem;
-}
 
-.Rooms h2
-{
-  margin: 0;
-  font-size: 1.2rem;
-}
 
 /* Resource Details */
 .time-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-  margin-top: 1rem;
+  display: grid;
+  gap: var(--space-xs);
 }
 
-.time-slots {
-  display: flex;
-  gap: 0.6rem;
-  margin-top: 0.5rem;
-}
-
-.time-slot {
-  display: block;
-  width: 100%;
-  padding: 1rem 1.2rem;
-  border: 2px solid var(--burnt-orange);
-  border-radius: var(--radius-m);
+/* Default state for time-slot buttons */
+.time-list button {
   background-color: var(--white);
   color: var(--text-dark);
+  border: 2px solid var(--burnt-orange);
+  border-radius: var(--radius-m);
+  padding: 1rem 1.2rem;
   font-weight: 600;
   text-align: center;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
-/* selected time */
-.time-slot.selected {
+/* Selected state (using aria-pressed) */
+.time-list button[aria-pressed="true"] {
   background-color: var(--burnt-orange);
   color: var(--white);
-  border-color: var(--burnt-orange);
 }
 
-/* Hover-effect */
-.time-slot:hover {
+/* Hover */
+.time-list button:hover {
   background-color: #ffe6cc;
 }
 
+.booking-confirm button[disabled] {
+  background-color: #ccc;
+  color: var(--text-dark);
+}
+
+.booking-confirm button:not([disabled]) {
+  background-color: var(--burnt-orange);
+  color: var(--white);
+}
+
 /* Booking page*/
-.BookingPage form {
+form {
   background-color: var(--white);
   padding: var(--space-m);
   border-radius: var(--radius-m);
@@ -217,26 +215,40 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex-direction: column;
   gap: var(--space-m);
   margin-bottom: var(--space-m);
+  max-width: 1000px;
+  margin: var(--space-m) auto;
+}
+
+form input[type="email"] {
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--burnt-orange);
+  border-radius: var(--radius-m);
+  background-color: var(--white);
+  font-size: 1rem;
 }
 
 form.BookingPage button {
   margin-top: var(--space-s);
 }
 
-.BookingPage input[type="email"] {
-  padding: 0.8rem 1rem;
-  border: 2px solid var(--burnt-orange);
+form button[disabled] {
+  background-color: #ccc;
+  color: var(--text-dark);
+  cursor: not-allowed;
   border-radius: var(--radius-m);
-  background-color: var(--white);
+  padding: 1rem 1.2rem;
+  font-weight: 600;
+  border: none;
 }
 
-/* Confirm Booking Section (booking page) */
-.confirm-booking-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-m);
-  padding: var(--space-l);
-  margin-top: var(--space-m);
+form button:not([disabled]) {
+  background-color: var(--burnt-orange);
+  color: var(--white);
+  cursor: pointer;
+  border-radius: var(--radius-m);
+  padding: 1rem 1.2rem;
+  font-weight: 600;
+  border: none;
 }
 
 label {
@@ -247,37 +259,55 @@ label {
   width: 100%;
 }
 
-.confirm-booking-section input[type="email"] {
-  padding: 1rem;
-  border: 2px solid var(--burnt-orange);
-  border-radius: var(--radius-m);
-  background-color: var(--white);
+.BookingDetails h2, h3 {
+  margin-top: 0;
+}
+
+.BookingDetails ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.BookingDetails ul li {
+  padding: 0.6rem 0.8rem;
+  background-color: var(--vanilla);
+  border-radius: var(--radius-s);
+  font-weight: 600;
+  color: var(--text-dark);
+  border-left: 4px solid var(--burnt-orange);
 }
 
 /* Booking Confirmation Page */
-.BookingConfirmationPage {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-l);
-}
-
-.BookingConfirmationPage .confirmation-details {
-  background-color: var(--white);
-  padding: var(--space-m);
-  border-radius: var(--radius-m);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-s);
-}
-
 .booking-details {
   background-color: var(--white);
-  padding: var(--space-m);
+  padding: var(--space-l);
   border-radius: var(--radius-m);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  margin-bottom: var(--space-m);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  margin-bottom: var(--space-l);
+  border-left: 6px solid var(--burnt-orange);
   line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/*Action buttons start/Avboka*/
+.BookingConfirmationPageBtn button {
+  padding: 0.8rem 1.2rem;
+  font-size: 1.2rem;
+  border-radius: var(--radius-m);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.BookingConfirmationPageBtn a button {
+  background-color: var(--burnt-orange);
+  color: var(--white);
+}
+
+.BookingConfirmationPageBtn button:not(a button) {
+  background-color: #fff4d6;
+  color: var(--text-dark);
   border: 2px solid var(--burnt-orange);
 }
 
@@ -297,6 +327,7 @@ label {
   margin-top: var(--space-s);
 }
 
+/*Dialog del*/
 dialog.BookingConfirmationPageCancelBtn {
   position: relative;
   margin: var(--space-m) auto 0 auto;
@@ -307,58 +338,94 @@ dialog.BookingConfirmationPageCancelBtn {
   text-align: center;
 }
 
-.cancel-button {
+.BookingConfirmationPageCancelBtn .cancelBtn {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-m);
+  justify-content: center;
+  margin-top: var(--space-s);
+}
+
+/* Cancel dialog buttons */
+.cancel-button,
+.BookingConfirmationPageCancelBtn .cancelBtn button {
   width: 100%;
   padding: 0.8rem 1rem;
   background-color: var(--burnt-orange);
   color: var(--white);
   border-radius: var(--radius-m);
   font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+/* JA-knappen */
+.BookingConfirmationPageCancelBtn .cancelBtn button:first-child {
+  background-color: var(--burnt-orange);
+  color: var(--white);
+  border: none;
+}
+
+/* NEJ-knappen */
+.BookingConfirmationPageCancelBtn .cancelBtn button:last-child {
+  background-color: var(--vanilla);
+  color: var(--text-dark);
+  border: 2px solid var(--burnt-orange);
+}
+
+.BookingConfirmationPageCancelBtn .cancelBtn button:first-child:hover {
+  background-color: #ff7f3a;
+}
+
+.BookingConfirmationPageCancelBtn .cancelBtn button:last-child:hover {
+  background-color: #ffe6cc;
+}
+
+/* Knappen som ligger direkt efter avbokningsmeddelandet */
+ h2 + p + a button {
+  background-color: var(--burnt-orange);
+  color: var(--white);
+  padding: 1rem 1.4rem;
+  border-radius: var(--radius-m);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
 }
 
 /* RESPONSIVE DESIGN */
 @media (min-width: 768px) {
-  main {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .Rooms {
+  .Rooms .list {
     grid-template-columns: repeat(2, 1fr);
-    
   }
-
-.Rooms li button {
-      padding: 1rem 1.2rem;
-     
-    }
-
-  .Rooms p {
-      margin: 1rem 0 0.5rem 0;
-      font-size: 1rem;
-      line-height: 1.2rem;
-    }
-  
-  .Rooms h2 {
-      margin: 1rem 0 0.5rem 0;
-      font-size: 1.2rem;
-    }
 
   .time-list {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.4rem;
+  }
+
+  .booking-details {
+    max-width: 700px;
+    margin: 0 auto var(--space-l);
+    font-size: 1.2rem;
+  }
+
+  .date-picker {
+    max-width: 500px;
+    margin: 0 auto;
   }
 }
-
-@media (min-width: 1100px) {
-  .Rooms {
+@media (min-width: 1200px) {
+  .Rooms .list {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .time-slots {
-    flex-wrap: wrap;
-    display: grid;
+  .time-list {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .booking-details {
+    max-width: 900px;
+  }
+
+  .date-picker {
+    max-width: 700px;
   }
 }
