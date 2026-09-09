@@ -1,20 +1,146 @@
 {
-  "$schema": "./node_modules/json-server/schema.json",
-  "products": [
+  "rooms": [
     {
-      "name": "Gummianka",
-      "description": "Bra att rådfråga när man kodar.",
-      "price": 99
+      "id": "a1",
+      "name": "Apelsin",
+      "capacity": 6,
+      "equipment": "Projektor, Whiteboard, HDMI"
     },
     {
-      "name": "Stressboll",
-      "description": "Bra att klämma på när man kodar.",
-      "price": 57
+      "id": "b2",
+      "name": "Banan",
+      "capacity": 4,
+      "equipment": "TV-skärm, Whiteboard"
     },
     {
-      "name": "Jolt Cola",
-      "description": "Bra att dricka litervis av när man kodar.",
-      "price": 15
+      "id": "c3",
+      "name": "Clementin",
+      "capacity": 8,
+      "equipment": "Projektor, Konferenstelefon, Whiteboard"
+    },
+    {
+      "id": "d4",
+      "name": "Druva",
+      "capacity": 10,
+      "equipment": "Projektor, Surround-ljud, Whiteboard"
+    },
+    {
+      "id": "e5",
+      "name": "Elefant",
+      "capacity": 12,
+      "equipment": "TV-skärm, Konferenstelefon, Whiteboard, HDMI"
     }
-  ]
+  ],
+  "bookings": [
+    {
+      "id": "1",
+      "roomId": "a1",
+      "date": "2026-09-11",
+      "slots": [
+        "09:00",
+        "10:00"
+      ],
+      "email": "anna@example.com",
+      "bookingStatus": "confirmed"
+    },
+    {
+      "id": "2",
+      "roomId": "a1",
+      "date": "2026-09-01",
+      "slots": [
+        "13:00"
+      ],
+      "email": "kalle@example.com",
+      "bookingStatus": "confirmed"
+    },
+    {
+      "id": "3",
+      "roomId": "b2",
+      "date": "2026-09-01",
+      "slots": [
+        "11:00",
+        "12:00"
+      ],
+      "email": "mia@example.com",
+      "bookingStatus": "confirmed"
+    },
+    {
+      "id": "4",
+      "roomId": "c3",
+      "date": "2026-09-01",
+      "slots": [
+        "14:00"
+      ],
+      "email": "erik@example.com",
+      "bookingStatus": "confirmed"
+    },
+    {
+      "id": "5",
+      "roomId": "a1",
+      "date": "2026-09-01",
+      "slots": [
+        "09:00"
+      ],
+      "email": "test@example.com",
+      "bookingStatus": "confirmed"
+    },
+    {
+      "roomId": "a1",
+      "date": "2026-09-23",
+      "slots": [
+        "10:00",
+        "11:00",
+        "12:00"
+      ],
+      "email": "eva@hej.se",
+      "bookingStatus": "confirmed",
+      "id": "hpkdJWVusZM"
+    },
+    {
+      "roomId": "a1",
+      "date": "2026-09-09",
+      "slots": [
+        "09:00",
+        "11:00",
+        "13:00"
+      ],
+      "email": "eva@hej.jej",
+      "bookingStatus": "cancelled",
+      "id": "D6EaKNmlh9c"
+    },
+    {
+      "roomId": "d4",
+      "date": "2026-09-09",
+      "slots": [
+        "09:00",
+        "10:00"
+      ],
+      "email": "eva@hej.jej",
+      "bookingStatus": "cancelled",
+      "id": "q9He_lIkqmk"
+    },
+    {
+      "roomId": "d4",
+      "date": "2026-09-10",
+      "slots": [
+        "09:00",
+        "10:00"
+      ],
+      "email": "eva@hej.hej",
+      "bookingStatus": "cancelled",
+      "id": "8kokti6Hd_I"
+    },
+    {
+      "roomId": "d4",
+      "date": "2026-09-10",
+      "slots": [
+        "11:00",
+        "12:00"
+      ],
+      "email": "eva@hej.hej",
+      "bookingStatus": "confirmed",
+      "id": "L-zS5rzP6kg"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
