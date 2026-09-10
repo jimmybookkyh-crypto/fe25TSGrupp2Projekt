@@ -43,8 +43,8 @@ In the root folder run
 ```
 
 npm start
-Json-Server `http://localhost:5173`.
-API starts at `http://localhost:3000`.
+Frontend starts at `http://localhost:5173`.
+Json-Server starts at`http://localhost:3000`.
 
 ```
 ## Gruppmedlemmar

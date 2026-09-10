@@ -57,7 +57,8 @@ export default function ResourceDetails() {
   }
   function renderBooking({ id, slots }: Booking) {
     return (
-      <article key={id}>
+      // tog bort onödig key id props från <article>
+      <article>
         <p>Bokningsid: {id}</p>
         <p>Bokade tider: {slots.join(", ")}</p>
       </article>
