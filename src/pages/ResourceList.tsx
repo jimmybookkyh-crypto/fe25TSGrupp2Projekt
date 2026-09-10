@@ -14,6 +14,9 @@ export default function ResourceList() {
   if (!rooms || !bookings) {
     return <p>Laddar</p>; //guard
   }
+  if (!date) {
+    return <p>Inget datum valt.</p>; //DATE NULL förbättringsförslag 
+  }
   function isRoomFullyBooked(roomId: string) {
     if (!bookings) return false;
     const roomBookings = bookings.filter(
@@ -25,9 +28,10 @@ export default function ResourceList() {
   }
   const availableRooms = rooms?.filter((room) => !isRoomFullyBooked(room.id));
 
+  // Updaterat key id tagit bort punkt 6 i förbättrings förslag
   function renderRoom({ id, name, capacity, equipment }: Room) {
     return (
-      <article key={id}>
+      <article>
         <button onClick={() => navigate(`/resources/${id}?date=${date}`)}>
           <h2>{name}</h2>
           <p>Rummets kapacitet: {capacity} personer</p>
