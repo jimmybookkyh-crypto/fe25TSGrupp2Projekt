@@ -1,4 +1,4 @@
-# Libery Trollsländan
+# Library Trollsländan
 
 Welcome to our page for booking of meetingrooms.
 
