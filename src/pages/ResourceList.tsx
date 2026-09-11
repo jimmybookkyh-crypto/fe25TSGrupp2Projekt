@@ -15,7 +15,7 @@ export default function ResourceList() {
     return <p>Laddar</p>; //guard
   }
   if (!date) {
-    return <p>Inget datum valt.</p>; //DATE NULL förbättringsförslag 
+    return <p>Inget datum valt.</p>; //DATE NULL förbättringsförslag
   }
   function isRoomFullyBooked(roomId: string) {
     if (!bookings) return false;
@@ -34,7 +34,7 @@ export default function ResourceList() {
       <article>
         <button onClick={() => navigate(`/resources/${id}?date=${date}`)}>
           <h2>{name}</h2>
-          <p>Rummets kapacitet: {capacity} personer</p>
+          <p>Plats för: {capacity} personer</p>
           <p>Rummets utrustning: {equipment}</p>
         </button>
       </article>
