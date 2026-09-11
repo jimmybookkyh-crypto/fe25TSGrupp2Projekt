@@ -1,4 +1,4 @@
-# Libery Trollständan
+# Libery Trollsländan
 
 Welcome to our page for booking of meetingrooms.
 
@@ -25,7 +25,7 @@ As a backend we use our own db.json server.
 ## Installation
 
 ```bash
-# Klona repot
+# Clone repository
 git clone [https://github.com/jimmybookkyh-crypto/fe25TSGrupp2Projekt.git]
 cd [fe25TSGrupp2Projekt]
 
