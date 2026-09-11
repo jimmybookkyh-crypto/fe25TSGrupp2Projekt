@@ -47,7 +47,7 @@ export default function CreateBooking() {
       );
 
       setError(
-        `Följande tider är redan bokade: ${formattedConflicts.join(", ")}`,
+        `Det verkar som att tiderna redan blivit bokade av någon annan: ${formattedConflicts.join(", ")}`
       );
       return;
     }
