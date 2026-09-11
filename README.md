@@ -1,4 +1,4 @@
-# Libery Trollständan
+# Library Trollsländan
 
 Welcome to our page for booking of meetingrooms.
 
@@ -25,7 +25,7 @@ As a backend we use our own db.json server.
 ## Installation
 
 ```bash
-# Klona repot
+# Clone repository
 git clone [https://github.com/jimmybookkyh-crypto/fe25TSGrupp2Projekt.git]
 cd [fe25TSGrupp2Projekt]
 
@@ -43,8 +43,8 @@ In the root folder run
 ```
 
 npm start
-Json-Server `http://localhost:5173`.
-API starts at `http://localhost:3000`.
+Frontend starts at `http://localhost:5173`.
+Json-Server starts at`http://localhost:3000`.
 
 ```
 ## Gruppmedlemmar

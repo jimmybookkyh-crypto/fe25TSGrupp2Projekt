@@ -57,7 +57,8 @@ export default function ResourceDetails() {
   }
   function renderBooking({ id, slots }: Booking) {
     return (
-      <article key={id}>
+      // tog bort onödig key id props från <article>
+      <article>
         <p>Bokningsid: {id}</p>
         <p>Bokade tider: {slots.join(", ")}</p>
       </article>
@@ -76,8 +77,8 @@ export default function ResourceDetails() {
       <section>
         <h2>{room.name}</h2>
         <p>Datum: {date}</p>
-        <p>Plats för: {room.capacity}</p>
-        <p>Utrustning: {room.equipment}</p>
+        <p>Plats för: {room.capacity} personer</p>
+        <p>Rummets utrustning: {room.equipment}</p>
       </section>
 
       <section>
@@ -117,10 +118,10 @@ export default function ResourceDetails() {
       </section>
 
       {confirmedBookings.length > 0 && (
-        <>
+        <section>
           <h2>Redan bokade tider detta datum</h2>
           <GenericList items={confirmedBookings} renderItem={renderBooking} />
-        </>
+        </section>
       )}
     </div>
   );
